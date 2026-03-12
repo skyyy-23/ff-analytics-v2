@@ -127,6 +127,12 @@ class SupabaseBranchRepository implements BranchRepositoryInterface
         $rows = $this->fetchRowsWithFallback([
             'branch,current_sales,previous_sales,expenses,cogs,avg_inventory,dead_stock,expected_pos_days,actual_pos_days',
         ], true);
+
+        if (!$rows) {
+            $rows = $this->fetchMonthlyRows();
+        }
+
+        $rows = $this->reduceToLatestBranchRows($rows);
         $this->branches = [];
         $this->branchesByName = [];
 
@@ -138,6 +144,11 @@ class SupabaseBranchRepository implements BranchRepositoryInterface
             $normalized = $this->normalizeRow($row);
             if ($normalized === null) {
                 continue;
+            }
+
+            $reportingPeriod = $this->extractReportingPeriod($row);
+            if ($reportingPeriod !== null) {
+                $normalized['reporting_period'] = $reportingPeriod;
             }
 
             $this->branches[] = $normalized;
@@ -279,6 +290,65 @@ class SupabaseBranchRepository implements BranchRepositoryInterface
         }
 
         return date('Y-m-d', $timestamp);
+    }
+
+    private function extractReportingPeriod(array $row): ?string
+    {
+        $candidate = $row[$this->monthCreatedColumn] ?? ($row['reporting_period'] ?? ($row['month'] ?? null));
+        return $this->normalizeReportingPeriod($candidate);
+    }
+
+    private function reduceToLatestBranchRows(array $rows): array
+    {
+        $latestByBranch = [];
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $branch = isset($row['branch']) ? trim((string)$row['branch']) : '';
+            if ($branch === '') {
+                continue;
+            }
+
+            $period = $this->extractReportingPeriod($row);
+            $timestamp = $period !== null ? strtotime($period) : null;
+
+            if (!isset($latestByBranch[$branch])) {
+                $latestByBranch[$branch] = [
+                    'row' => $row,
+                    'ts' => $timestamp,
+                ];
+                continue;
+            }
+
+            $existingTs = $latestByBranch[$branch]['ts'];
+            if ($existingTs === null) {
+                if ($timestamp !== null) {
+                    $latestByBranch[$branch] = [
+                        'row' => $row,
+                        'ts' => $timestamp,
+                    ];
+                }
+                continue;
+            }
+
+            if ($timestamp !== null && $timestamp > $existingTs) {
+                $latestByBranch[$branch] = [
+                    'row' => $row,
+                    'ts' => $timestamp,
+                ];
+            }
+        }
+
+        $result = [];
+        foreach ($latestByBranch as $entry) {
+            if (is_array($entry) && isset($entry['row']) && is_array($entry['row'])) {
+                $result[] = $entry['row'];
+            }
+        }
+
+        return $result;
     }
 
     private function toMonthKey(string $reportingPeriod): ?string
