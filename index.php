@@ -1,10 +1,7 @@
 <?php
-require_once __DIR__ . '/app/bootstrap.php';
+ob_start(); // Start output buffering
 
-$controller = AppFactory::makeDashboardController();
-$controller->index(new Request());
-
-// Load environment variables
+// --- Basic Auth ---
 $USERNAME = getenv('APP_USER');
 $PASSWORD = getenv('APP_PASS');
 
@@ -15,13 +12,20 @@ if (!$USERNAME || !$PASSWORD) {
     exit;
 }
 
-// HTTP Basic Authentication
 if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) ||
     $_SERVER['PHP_AUTH_USER'] !== $USERNAME ||
     $_SERVER['PHP_AUTH_PW'] !== $PASSWORD) {
-    
+
     header('WWW-Authenticate: Basic realm="Protected Area"');
     header('HTTP/1.0 401 Unauthorized');
     echo 'Unauthorized';
     exit;
 }
+
+// --- Load your app ---
+require_once __DIR__ . '/app/bootstrap.php';
+
+$controller = AppFactory::makeDashboardController();
+$controller->index(new Request());
+
+ob_end_flush(); // Send output
