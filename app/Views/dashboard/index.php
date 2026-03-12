@@ -9,7 +9,7 @@ $jsVersion = is_file($jsFile) ? (string)filemtime($jsFile) : '1';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Franchise Health Dashboard</title>
+    <title>Franchise Analytics Dashboard</title>
 
     <link rel="stylesheet" href="./assets/css/franchise-health.css?v=<?= htmlspecialchars($cssVersion, ENT_QUOTES, 'UTF-8') ?>">
 
@@ -21,6 +21,7 @@ $jsVersion = is_file($jsFile) ? (string)filemtime($jsFile) : '1';
 <div class="top-controls">
     <h1 class="page-title">
         Franchise <span style="color:#f6bd38">Analytics</span>
+        <span style="font-size: 13px; color: white;">Sample data not the real data</span>
     </h1>
     <div class="filter-bar">
         <div class="filter-left">
