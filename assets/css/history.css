@@ -1,0 +1,451 @@
+.history-page-body,
+.history-page-body * {
+    box-sizing: border-box;
+}
+
+.history-page-body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background: #e5ecff;
+    color: #2e2e48;
+}
+
+.history-page {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.history-header {
+    background: #2e2e48;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 16px 18px;
+}
+
+.history-header h1 {
+    margin: 8px 0 4px;
+    font-size: clamp(1.25rem, 2vw, 1.8rem);
+}
+
+.history-header p {
+    margin: 0;
+    color: #d8dfff;
+    font-size: 0.92rem;
+}
+
+.history-back-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #2e2e48;
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.76rem;
+    font-weight: 600;
+}
+
+.history-controls {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.history-controls label {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.history-controls select {
+    min-width: 220px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid #c9d5ef;
+    background: #ffffff;
+    font-family: "Poppins", sans-serif;
+    color: #1f2937;
+}
+.history-controls select:focus {
+    outline: none;
+    border-color: #0000a9;
+    box-shadow: 0 0 0 2px rgba(122, 160, 249, 0.3);
+}
+.history-summary-cards {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.history-summary-card {
+    background: #ffffff;
+    border: 1px solid #d8e0f7;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.history-summary-card h2 {
+    margin: 0 0 6px;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #5a6786;
+}
+
+.history-page-body-branch-scope .history-summary-top,
+.history-page-body-branch-scope .history-summary-bottom,
+.history-page-body-branch-scope .history-summary-risk {
+    display: none;
+}
+
+.history-page-body-branch-scope .history-summary-cards {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 280px;
+}
+
+.history-summary-value {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.history-graph-panel {
+    margin-top: 12px;
+    background: #ffffff;
+    border: 1px solid #d8e0f7;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.history-graph-panel.is-hidden {
+    display: none;
+}
+
+.history-graph-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.history-graph-headline {
+    min-width: 0;
+}
+
+.history-graph-header h2 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.history-graph-header p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.history-graph-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.history-graph-controls label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.history-graph-controls select {
+    min-width: 150px;
+    padding: 6px 8px;
+    border-radius: 7px;
+    border: 1px solid #c9d5ef;
+    background: #ffffff;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.8rem;
+    color: #1f2937;
+}
+
+.history-graph-controls select:focus {
+    outline: none;
+    border-color: #0000a9;
+    box-shadow: 0 0 0 2px rgba(122, 160, 249, 0.3);
+}
+
+.history-graph-canvas-wrap {
+    margin-top: 10px;
+    height: 320px;
+    border: 1px solid #e5e9f6;
+    border-radius: 8px;
+    padding: 8px;
+    background: #fbfcff;
+}
+
+.history-graph-canvas-wrap canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.history-graph-empty {
+    margin-top: 10px;
+}
+
+.history-narrative-panel {
+    margin-top: 12px;
+    background: #ffffff;
+    border: 1px solid #d8e0f7;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.history-narrative-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.history-narrative-header h2 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.history-narrative-header p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.history-narrative-body {
+    margin-top: 10px;
+}
+
+.history-ai-loading,
+.history-ai-empty,
+.history-ai-error {
+    margin: 0;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f5f8ff;
+    color: #334155;
+    font-size: 0.85rem;
+}
+
+.history-ai-error {
+    background: #ffe9e9;
+    color: #9f1239;
+}
+
+.history-ai-overview,
+.history-ai-points,
+.history-ai-action {
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.history-ai-overview {
+    background: #eef2ff;
+    border: 1px solid #d7deff;
+}
+
+.history-ai-points {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.history-ai-action {
+    background: #fff7e9;
+    border: 1px solid #f0dfc0;
+    border-left: 4px solid #ef6728;
+}
+
+.history-ai-overview h3,
+.history-ai-points h3,
+.history-ai-action h3 {
+    margin: 0 0 6px;
+    font-size: 0.82rem;
+    color: #465067;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.history-ai-overview p,
+.history-ai-action p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #1f2937;
+}
+
+.history-ai-points ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.history-ai-points li {
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+    color: #334155;
+    line-height: 1.4;
+}
+
+.history-table-panel {
+    margin-top: 12px;
+    background: #ffffff;
+    border: 1px solid #d8e0f7;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.history-table-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.history-table-header h2 {
+    margin: 0;
+    font-size: 1.02rem;
+}
+
+.history-table-header p {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #64748b;
+}
+
+.history-table-wrap {
+    margin-top: 10px;
+    overflow-x: auto;
+    border-radius: 8px;
+}
+
+.history-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+    border-bottom: 1px solid #e5e9f6;
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 0.84rem;
+}
+
+.history-table th {
+    background: #2e2e48;
+    color: #ffffff;
+    font-weight: 600;
+    border-bottom: none;
+}
+
+.history-table tr:last-child td {
+    border-bottom: none;
+}
+
+.history-score {
+    font-weight: 700;
+}
+
+.history-status-pill {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.history-status-pill.status-excellent {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.history-status-pill.status-good {
+    background: #e0f2fe;
+    color: #0c4a6e;
+}
+
+.history-status-pill.status-warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.history-status-pill.status-critical {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.history-loading-cell,
+.history-empty-cell,
+.history-error-cell {
+    text-align: center;
+    color: #64748b;
+}
+
+.history-breakdown-summary {
+    background: #f8fbff;
+    color: #334155;
+    font-weight: 600;
+}
+
+.history-error-cell {
+    color: #9f1239;
+}
+
+@media (max-width: 992px) {
+    .history-summary-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .history-page {
+        padding: 12px;
+    }
+
+    .history-header {
+        padding: 12px;
+    }
+
+    .history-summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .history-controls select {
+        width: 100%;
+    }
+
+    .history-narrative-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .history-graph-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .history-graph-controls {
+        width: 100%;
+    }
+
+    .history-graph-controls select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .history-graph-canvas-wrap {
+        height: 250px;
+    }
+}
