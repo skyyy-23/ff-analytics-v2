@@ -1,5 +1,5 @@
 <?php
-ob_start(); // Start output buffering
+/*ob_start(); // Start output buffering
 
 $ISLOCAL=($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1');
 
@@ -25,11 +25,11 @@ if(!$ISLOCAL){
         exit;
     }
 }
-
+*/
 // --- Load your app ---
 require_once __DIR__ . '/app/bootstrap.php';
 
 $controller = AppFactory::makeDashboardController();
 $controller->index(new Request());
 
-ob_end_flush(); // Send output
+// ob_end_flush(); // Send output
